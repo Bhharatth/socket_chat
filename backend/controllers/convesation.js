@@ -1,5 +1,5 @@
 import AsyncHandler from "express-async-handler";
-import Conversation from "../models/Conversation";
+import Conversation from "../models/Conversation.js";
 
 //new conversation
 
@@ -20,7 +20,7 @@ export const newConversation = AsyncHandler(async (req, res) => {
 //GET CONVERSATION OF A USER
 
 export const getUserConversation = AsyncHandler(async (req, res) => {
-  const { userId } = req.params.userId;
+  const { userId } = req.params;
 
   try {
     const conversation = await Conversation.find({

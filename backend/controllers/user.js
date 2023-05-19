@@ -1,12 +1,9 @@
-import { Router } from "express";
-const bcrypt = require("bcrypt");
 import AsyncHandler from "express-async-handler";
-import User from "../models/User";
+import User from "../models/User.js"
 
 //get a user
 export const getUser = AsyncHandler(async (req, res) => {
-  const { userId } = req.query.userId;
-  const { username } = req.query.username;
+  const { userId, username } = req.query;
 
   try {
     const user = userId

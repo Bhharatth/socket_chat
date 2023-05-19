@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-// import { PF } from "../../apiCalls";
+import Conversations from "../../components/conversations/Conversations";
+import { PF } from "../../utils";
+import { AuthContext } from "../../context/AuthContext";
+import Messages from "../../components/messages/Messages";
+import "./Messenger.css";
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
@@ -9,14 +13,15 @@ const Messenger = () => {
   const [newMessage, setNewMessage] = useState("");
   // console.log(user);
   const [conversation, setConversation] = useState([]);
+  console.log(messages)
 
   useEffect(() => {
     const getConversations = async () => {
-      const res = await axios.get(PF + "/api/conversations/" + user._id);
+      const res = await axios.get(PF + "/api/conversations/" + user?._id);
       setConversation(res.data);
     };
     getConversations();
-  }, []);
+  }, [user?._id]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -35,7 +40,7 @@ const Messenger = () => {
     };
 
     try {
-      const res = await axios.post(PF + "/api/messages//" ,message);
+      const res = await axios.post(PF + "/api/messages/" ,message);
       setMessages([...message, res.data]);
       setNewMessage("")
       
@@ -53,7 +58,7 @@ const Messenger = () => {
             {conversation.map((c) => (
               <>
                 <div onClick={() => setCurrentchat(c)}>
-                  <Conversation conversation={c} currentUser={user} />
+                  <Conversations conversation={c} currentUser={user} />
                 </div>
               </>
             ))}

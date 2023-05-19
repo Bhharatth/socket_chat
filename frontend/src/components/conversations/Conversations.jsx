@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Conversations.css";
 import axios from "axios";
-import { PF } from "../../apiCalls";
+import { PF } from "../../utils";
 
 const Conversations = ({ conversation, currentUser }) => {
   const [User, setUser] = useState(null);
+  console.log({ conversation, currentUser })
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);
