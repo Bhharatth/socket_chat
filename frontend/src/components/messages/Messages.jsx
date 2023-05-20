@@ -14,6 +14,7 @@ const Messages = ({message, own}) => {
       <p className="messageText">{message.text}</p>
     </div>
     <div className="messageBottom">{message.createdAt}</div>
+    <div className="messageBottom">{message.sender}</div>
   </div>
   )
 }
